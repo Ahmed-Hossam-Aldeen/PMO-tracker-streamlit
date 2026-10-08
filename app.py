@@ -110,8 +110,8 @@ def main():
 
     st.subheader("Daily streak")
     chart = go.Figure()
-    chart.add_trace(go.Scatter(x=daily["Date"], y=daily["Streak"], mode="lines",
-                              name="Streak", line=dict(color="#14b8a6", width=3),
+    chart.add_trace(go.Scatter(x=daily["Date"], y=daily["Streak"], mode="markers",
+                              name="Streak", line=dict(color="#14b8a6", width=1),
                               fill="tozeroy", fillcolor="rgba(20,184,166,0.10)",
                               hovertemplate="%{x|%d/%m/%Y}<br>Streak: %{y} days<extra></extra>"))
     failed = daily[daily["Failed"]]
