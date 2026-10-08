@@ -6,7 +6,14 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-EXAMPLE = """Failed on: 14/9/2026 16/9/2026 19/9/2026 26/9/2026 30/9/2026 1/10/2026 3/10/2026"""
+EXAMPLE = """14/9/2026
+16/9/2026
+19/9/2026
+26/9/2026
+30/9/2026
+1/10/2026
+3/10/2026
+7/10/2026"""
 WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 
@@ -50,8 +57,8 @@ def weekday_summary(daily):
 
 
 def main():
-    st.set_page_config(page_title="PMO Streak Tracker", page_icon="ðŸŒ±", layout="wide")
-    st.title("ðŸŒ± PMO streak tracker")
+    st.set_page_config(page_title="PMO Streak Tracker", layout="wide")
+    st.title("PMO streak tracker")
     st.caption("Track your progress, notice patterns, and keep going one day at a time.")
     today = datetime.now(ZoneInfo("Africa/Cairo")).date()
 
@@ -103,14 +110,14 @@ def main():
 
     st.subheader("Daily streak")
     chart = go.Figure()
-    chart.add_trace(go.Scatter(x=daily["Date"], y=daily["Streak"], mode="lines+markers",
+    chart.add_trace(go.Scatter(x=daily["Date"], y=daily["Streak"], mode="lines",
                               name="Streak", line=dict(color="#14b8a6", width=3),
                               fill="tozeroy", fillcolor="rgba(20,184,166,0.10)",
                               hovertemplate="%{x|%d/%m/%Y}<br>Streak: %{y} days<extra></extra>"))
     failed = daily[daily["Failed"]]
-    chart.add_trace(go.Scatter(x=failed["Date"], y=failed["Streak"], mode="markers",
-                              name="Failure day", marker=dict(color="#f87171", size=11, symbol="x"),
-                              hovertemplate="%{x|%d/%m/%Y}<br>Failure â€” streak reset to 0<extra></extra>"))
+    #chart.add_trace(go.Scatter(x=failed["Date"], y=failed["Streak"], mode="markers",
+    #                          name="Failure day", marker=dict(color="#f87171", size=11, symbol="x"),
+    #                          hovertemplate="%{x|%d/%m/%Y}<br>Failure â€” streak reset to 0<extra></extra>"))
     chart.update_layout(height=370, margin=dict(l=20, r=20, t=15, b=20),
                         xaxis_title="Date", yaxis_title="Consecutive successful days",
                         legend=dict(orientation="h", y=1.12), hovermode="x unified")
