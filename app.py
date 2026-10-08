@@ -110,13 +110,13 @@ def main():
 
     st.subheader("Daily streak")
     chart = go.Figure()
-    chart.add_trace(go.Scatter(x=daily["Date"], y=daily["Streak"], mode="markers",
-                              name="Streak", line=dict(color="#14b8a6", width=1),
+    chart.add_trace(go.Scatter(x=daily["Date"], y=daily["Streak"], mode="lines",
+                              name="Streak", line=dict(color="#14b8a6", width=3),
                               fill="tozeroy", fillcolor="rgba(20,184,166,0.10)",
                               hovertemplate="%{x|%d/%m/%Y}<br>Streak: %{y} days<extra></extra>"))
     failed = daily[daily["Failed"]]
-    chart.add_trace(go.Scatter(x=failed["Date"], y=failed["Streak"], mode="lines",
-                              name="Failure day", marker=dict(color="#f87171", size=11, symbol="x"),
+    chart.add_trace(go.Scatter(x=failed["Date"], y=failed["Streak"], mode="markers",
+                              name="Failure day", marker=dict(color="#f87171", size=3, symbol="o"),
                               hovertemplate="%{x|%d/%m/%Y}<br>Failure â€” streak reset to 0<extra></extra>"))
     chart.update_layout(height=370, margin=dict(l=20, r=20, t=15, b=20),
                         xaxis_title="Date", yaxis_title="Consecutive successful days",
