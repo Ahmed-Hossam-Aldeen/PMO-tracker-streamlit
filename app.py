@@ -115,9 +115,9 @@ def main():
                               fill="tozeroy", fillcolor="rgba(20,184,166,0.10)",
                               hovertemplate="%{x|%d/%m/%Y}<br>Streak: %{y} days<extra></extra>"))
     failed = daily[daily["Failed"]]
-    #chart.add_trace(go.Scatter(x=failed["Date"], y=failed["Streak"], mode="markers",
-    #                          name="Failure day", marker=dict(color="#f87171", size=11, symbol="x"),
-    #                          hovertemplate="%{x|%d/%m/%Y}<br>Failure â€” streak reset to 0<extra></extra>"))
+    chart.add_trace(go.Scatter(x=failed["Date"], y=failed["Streak"], mode="lines",
+                              name="Failure day", marker=dict(color="#f87171", size=11, symbol="x"),
+                              hovertemplate="%{x|%d/%m/%Y}<br>Failure â€” streak reset to 0<extra></extra>"))
     chart.update_layout(height=370, margin=dict(l=20, r=20, t=15, b=20),
                         xaxis_title="Date", yaxis_title="Consecutive successful days",
                         legend=dict(orientation="h", y=1.12), hovermode="x unified")
@@ -134,7 +134,6 @@ def main():
                        xaxis_title="Weekday")
     bars.update_yaxes(rangemode="tozero", dtick=1 if field == "Failures" else None)
     st.plotly_chart(bars, width="stretch")
-    st.caption("Failure rate = failure days Ã· tracked occurrences of that weekday. Weekdays with no tracked days have no rate. Small samples can vary a lot.")
     if int(summary["Failures"].sum()):
         maximum = summary["Failures"].max()
         leaders = summary.loc[summary["Failures"] == maximum, "Weekday"].tolist()
@@ -142,9 +141,9 @@ def main():
     else:
         st.success("No failure days logged in this range.")
     with st.expander("View daily data and export"):
-        st.dataframe(daily, hide_index=True, width="stretch")
-        st.download_button("Download daily CSV", daily.to_csv(index=False),
-                           "pmo_daily_streak.csv", "text/csv")
+        #st.dataframe(daily, hide_index=True, width="stretch")
+        #st.download_button("Download daily CSV", daily.to_csv(index=False),
+        #                   "pmo_daily_streak.csv", "text/csv")
         st.dataframe(summary, hide_index=True, width="stretch")
 
 
