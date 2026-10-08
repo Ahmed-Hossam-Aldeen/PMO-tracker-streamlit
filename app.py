@@ -116,7 +116,7 @@ def main():
                               hovertemplate="%{x|%d/%m/%Y}<br>Streak: %{y} days<extra></extra>"))
     failed = daily[daily["Failed"]]
     chart.add_trace(go.Scatter(x=failed["Date"], y=failed["Streak"], mode="markers",
-                              name="Failure day", marker=dict(color="#f87171", size=3, symbol="o"),
+                              name="Failure day", marker=dict(color="#f87171", size=3, symbol="O"),
                               hovertemplate="%{x|%d/%m/%Y}<br>Failure â€” streak reset to 0<extra></extra>"))
     chart.update_layout(height=370, margin=dict(l=20, r=20, t=15, b=20),
                         xaxis_title="Date", yaxis_title="Consecutive successful days",
