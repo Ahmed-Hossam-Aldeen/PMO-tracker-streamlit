@@ -21,7 +21,8 @@ EXAMPLE = """14/9/2026
 24/10/2026
 28/10/2026
 30/10/2026
-6/11/2026"""
+6/11/2026
+10/11/2026"""
 WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 
